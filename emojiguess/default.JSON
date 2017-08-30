@@ -1,0 +1,53 @@
+{
+    "challenges":{
+        "one":{
+            "title":"Filmes"
+        },
+        "two":{
+            "title":"Carros"
+        }
+    },
+    "emojis":{
+        "one":{
+            "e1":"🐝🎥",
+            "e2":"🏠🎈👴🏻👦🏻",
+            "e3":"👽😎😎",
+            "e4":"🦁🐍🐵🐼👊🏻",
+            "e5":"🐜🐜🐜🐜",
+            "e6":"🐷🏠👴🏻",
+            "e7":"👩🏼👨🏻✈️➡️👦🏼🏠",
+            "e8":"😱🔪😵",
+            "e9":"🚢💥🛶🙋🏼💔",
+            "e10":"🇺🇸🍰",
+            "e11":"🎎💭",
+            "e12":"🐭🍛🍝🎂🍩"
+        },
+        "two":{
+            "e1":"👨🏻💔",
+            "e2":"🏠",
+            "e3":"✈️"
+        }
+    },
+    "correctAnswers":{
+        "one":{
+            "e1":["Bee Movie"],
+            "e2":["Up", "Up Altas Aventuras"],
+            "e3":["MIB", "Homens de Preto", "MIB Homens de Preto"],
+            "e4":["Kung Fu Panda"],
+            "e5":["Formiguinhaz", "Antz"],
+            "e6":["Babe", "Babe O porquinho atrapalhado"],
+            "e7":["Esqueceram de Mim", "Home Alone"],
+            "e8":["Panico", "Pânico"],
+            "e9":["Titanic"],
+            "e10":["American Pie"],
+            "e11":["Mulan"],
+            "e12":["Ratatouille"]
+        },
+        "two":{
+            "e1":["Love"],
+            "e2":["House"],
+            "e3":["airplanes"]
+        }
+    }
+}
+
