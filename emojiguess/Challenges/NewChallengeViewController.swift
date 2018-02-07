@@ -27,12 +27,10 @@ class NewChallengeViewController: UIViewController, UITableViewDataSource, UITab
         // Dispose of any resources that can be recreated.
     }
     
-    @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return emojisRegistered.count
     }
     
-    @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"emojiCell", for: indexPath)
         let challengeItem = (emojisRegistered[indexPath.row] as ChallengeItem)
