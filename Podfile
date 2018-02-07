@@ -13,7 +13,13 @@ target 'emojiguess' do
   pod 'FirebaseUI/Auth', '~> 4.0'
   pod 'FirebaseUI/Facebook', '~> 4.0'
   
-  pod 'FBSDKCoreKit'
-  pod 'FBSDKLoginKit'
+  pod 'FBSDKCoreKit',  '4.26'
+  pod 'FBSDKLoginKit', '4.26'
+  
+#  pod 'SwiftyJSON'
+  pod 'Fabric'
+  pod 'Crashlytics'
+  pod 'iCarousel'
+  pod 'FontAwesomeKit/FontAwesome'
   
 end

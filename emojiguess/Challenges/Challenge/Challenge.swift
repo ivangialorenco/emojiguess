@@ -14,37 +14,40 @@ struct Challenge {
     let key: String
     let title: String
     var items:[ChallengeItem] = []
+    var creatorName:String
     let ref:DatabaseReference?
 //
 //    let peoplePlaying = 0
 //    var peopleFinished = 0
     
-    init(title: String, items:[ChallengeItem], key: String = "") {
+    init(title: String, creatorName: String, items:[ChallengeItem], key: String = "") {
         self.key = key
         self.title = title
+        self.creatorName = creatorName
         self.items = items
         self.ref = nil
     }
     
     init(snapshot: DataSnapshot) {
-        key = snapshot.key
         let snapshotValue = snapshot.value as! [String: AnyObject]
+        
+        key = snapshot.key
         title = snapshotValue["title"] as! String
-//        items = snapshotValue["items"] as! [ChallengeItem]
-//        answer = snapshotValue["answer"] as! String
+        creatorName = snapshotValue["creator"] as! String
         ref = snapshot.ref
     }
     
-    func toAnyObject() -> (title: Any, challengeItems: Any) {
+    func toAnyObject() -> [String:Any] {
+        return ["title": title, "creator": creatorName]
+    }
+    
+    func challengeItemsToAnyObject() -> [Any] {
         var challengeItems:[Any] = []
         
         for item in items {
             challengeItems.append(item.toAnyObject().challengeItem)
         }
         
-        return (
-            title: ["title": title],
-            challengeItems: challengeItems
-        )
+        return challengeItems
     }
 }

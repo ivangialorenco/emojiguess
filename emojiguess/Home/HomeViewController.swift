@@ -47,9 +47,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"challengeCell", for: indexPath) as! ChallengeListTableViewCell
-        
-        cell.title?.text = challengeManager?.challenges[indexPath.row].title
-        cell.numberOfItemsLabel?.text = String(format: "%ld desafios", (challengeManager?.challenges[indexPath.row].items.count)!)
+        let challenge = challengeManager?.challenges[indexPath.row]
+        cell.title?.text = challenge?.title
+        cell.numberOfItemsLabel?.text = String(format: "%ld desafios - %@", (challenge!.items.count), (challenge?.creatorName)!)
         
         return cell
     }

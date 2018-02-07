@@ -55,11 +55,12 @@ class ChallengeManager: NSObject {
         databaseManager = DatabaseManager()
         
         let timeStamp = String(Int64(Date.timeIntervalSinceReferenceDate * 1000))
-        let challengeTuple = challenge.toAnyObject()
         
-        databaseManager?.ref?.child("challenges").child(timeStamp).setValue(challengeTuple.title, withCompletionBlock: { (error, ref) in
-            self.databaseManager?.ref?.child("challengeItems").child(timeStamp).setValue(challengeTuple.challengeItems, withCompletionBlock: { (error, ref) in
-                completion()
+        databaseManager?.ref?.child("challenges").child(timeStamp).setValue(challenge.toAnyObject(), withCompletionBlock: { (error, ref) in
+            self.databaseManager?.ref?.child("challengeItems").child(timeStamp).setValue(challenge.challengeItemsToAnyObject(), withCompletionBlock: { (error, ref) in
+                self.databaseManager?.ref?.child("Users").child((UserManager.sharedInstance.user?.id)!).child("challenges").setValue(timeStamp, withCompletionBlock: { (error, ref) in
+                    completion()
+                })
             })
         })
     }

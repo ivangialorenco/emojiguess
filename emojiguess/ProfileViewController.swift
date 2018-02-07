@@ -24,53 +24,64 @@ extension ProfileViewController: FBSDKLoginButtonDelegate {
             if error != nil {
                 return
             }
+
+            self.performSegue(withIdentifier: "tabViewControllerSegue", sender: nil)
         }
     }
     
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        // ...
+        if (self.tabBarController != nil) {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
+    
 }
 
 class ProfileViewController: UIViewController {
 
     @IBOutlet weak var fbLoginButton: FBSDKLoginButton!
+    @IBOutlet weak var userImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         fbLoginButton.readPermissions = ["public_profile", "email"]
         
-        let graphRequest:FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"first_name, last_name, email, picture.type(large)"])
-        
         if (FBSDKAccessToken.current() != nil) {
-            graphRequest.start(completionHandler: { (connection, result, error) -> Void in
+            UserManager.sharedInstance.facebookInfo { (user) in
+                self.title = user.fullName;
                 
-                if ((error) != nil) {
-                    
-                } else {
-                    let data:[String:AnyObject] = result as! [String : AnyObject]
-                    print(data)
-                    self.title = (data["first_name"] as! String) + " " + (data["last_name"] as! String)
+                if let checkedUrl = URL(string: user.profileURL!) {
+                    self.userImage.contentMode = .scaleAspectFit
+                    self.downloadImage(url: checkedUrl)
                 }
-            })
+                
+                if (self.tabBarController != nil) {
+                    return
+                }
+                
+                self.performSegue(withIdentifier: "tabViewControllerSegue", sender: nil)
+            }
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
+        URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+            completion(data, response, error)
+            }.resume()
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func downloadImage(url: URL) {
+        print("Download Started")
+        getDataFromUrl(url: url) { (data, response, error)  in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            DispatchQueue.main.async() { () -> Void in
+                self.userImage.image = UIImage(data: data)
+            }
+        }
     }
-    */
-
 }

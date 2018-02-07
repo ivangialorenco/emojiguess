@@ -44,7 +44,7 @@ class NewChallengeViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBAction func submitButtonTapped(_ sender: Any) {
         let challengeManager = ChallengeManager()
-        challengeManager.createChallenge(challenge: Challenge(title: challengeTitleTextField.text!, items: emojisRegistered, key: "")) {
+        challengeManager.createChallenge(challenge: Challenge(title: challengeTitleTextField.text!, creatorName: (UserManager.sharedInstance.user?.fullName)!, items: emojisRegistered, key: "")) {
             self.navigationController?.popViewController(animated: true)
         }
     }
