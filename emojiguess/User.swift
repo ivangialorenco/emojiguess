@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class User: NSObject {
 
@@ -15,6 +16,7 @@ class User: NSObject {
     var lastName:String?
     var fullName:String?
     var profileURL:String?
+    var ref:DatabaseReference?
     
     var challenges:[Challenge]?
 
@@ -29,5 +31,15 @@ class User: NSObject {
         let pictureValue = (data["picture"] as! [String: AnyObject])["data"] as! [String: AnyObject]
 
         self.profileURL = pictureValue["url"] as? String
+        
+        let databaseManager = DatabaseManager()
+    }
+    
+    func isMyChallenge(challenge:Challenge) -> Bool {
+        if (challenge.creatorName == (self.firstName! + " " + self.lastName!)) {
+            return true
+        }
+        
+        return false
     }
 }

@@ -11,12 +11,10 @@ import FirebaseDatabase
 
 class ChallengeManager: NSObject {
     var challenges:[Challenge] = []
-    var databaseManager:DatabaseManager?
+    var databaseManager:DatabaseManager = DatabaseManager()
     
-    func loadChallenges(completion: @escaping () -> Void) {
-        databaseManager = DatabaseManager()
-        
-        databaseManager?.ref?.child("challenges").observe(.value, with: { (snapshot) in
+    func refreshChallenges(completion: @escaping () -> Void) {
+        self.databaseManager.ref?.child("challenges").observeSingleEvent(of: .value, with: { (snapshot) in
             self.challenges.removeAll()
             var count:UInt = 0
             
@@ -37,9 +35,7 @@ class ChallengeManager: NSObject {
     }
     
     func loadChallengeItems(challenge: Challenge, completion: @escaping (_ challenge: [ChallengeItem]) -> Void) {
-        databaseManager = DatabaseManager()
-        
-        databaseManager?.ref?.child("challengeItems/\(challenge.key)").observeSingleEvent(of: .value, with: { (snapshot) in
+        self.databaseManager.getChallengeItemsRef().child(challenge.key).observeSingleEvent(of: .value, with: { (snapshot) in
             
             var newItems: [ChallengeItem] = []
             for item in snapshot.children {
@@ -52,15 +48,27 @@ class ChallengeManager: NSObject {
     }
     
     func createChallenge(challenge: Challenge, completion: @escaping () -> Void) {
-        databaseManager = DatabaseManager()
+        var timeStamp = String(Int64(Date.timeIntervalSinceReferenceDate * 1000))
         
-        let timeStamp = String(Int64(Date.timeIntervalSinceReferenceDate * 1000))
+        if (challenge.key != "") {
+            timeStamp = challenge.key
+        }
         
-        databaseManager?.ref?.child("challenges").child(timeStamp).setValue(challenge.toAnyObject(), withCompletionBlock: { (error, ref) in
-            self.databaseManager?.ref?.child("challengeItems").child(timeStamp).setValue(challenge.challengeItemsToAnyObject(), withCompletionBlock: { (error, ref) in
-                self.databaseManager?.ref?.child("Users").child((UserManager.sharedInstance.user?.id)!).child("challenges").setValue(timeStamp, withCompletionBlock: { (error, ref) in
+        self.databaseManager.getChallengesRef().child(timeStamp).setValue(challenge.toAnyObject(), withCompletionBlock: { (error, ref) in
+            self.databaseManager.getChallengeItemsRef().child(timeStamp).setValue(challenge.challengeItemsToAnyObject(), withCompletionBlock: { (error, ref) in
+                self.databaseManager.getUsersRef().child((UserManager.sharedInstance.user?.id)!).child("challenges").child(timeStamp).setValue("true", withCompletionBlock: { (error, ref) in
                     completion()
                 })
+            })
+        })
+    }
+    
+    func deleteChallenge(challenge: Challenge, completion: @escaping () -> Void) {
+        challenge.ref?.removeValue(completionBlock: { (error, ref) in
+            self.databaseManager.getChallengeItemsRef().child(challenge.key).removeValue(completionBlock: { (erroer, ref) in
+                self.refreshChallenges {
+                    completion()
+                }
             })
         })
     }

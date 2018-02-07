@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         Fabric.with([Crashlytics.self])
 
+        Database.database().isPersistenceEnabled = true
         
         return true
     }

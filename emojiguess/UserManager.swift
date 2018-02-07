@@ -8,19 +8,16 @@
 
 import UIKit
 import FBSDKLoginKit
+import FirebaseDatabase
 
 class UserManager: NSObject {
     
     static let sharedInstance = UserManager()
-    
     var user:User?
     
     func facebookInfo(completion: @escaping (User) -> Void) {
         let graphRequest:FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"first_name, last_name, email, picture.type(large)"])
-        
-        
             graphRequest.start(completionHandler: { (connection, result, error) -> Void in
-                
                 if ((error) != nil) {
                     
                 } else {
@@ -29,7 +26,5 @@ class UserManager: NSObject {
                     completion(self.user!);
                 }
             })
-        
-
     }
 }

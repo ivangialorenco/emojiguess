@@ -15,4 +15,16 @@ class DatabaseManager {
     init() {
         ref = Database.database().reference()
     }
+    
+    func getUsersRef() -> DatabaseReference{
+        return ref.child("Users")
+    }
+    
+    func getChallengesRef() -> DatabaseReference{
+        return ref.child("challenges")
+    }
+    
+    func getChallengeItemsRef() -> DatabaseReference{
+        return ref.child("challengeItems")
+    }
 }

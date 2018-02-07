@@ -23,17 +23,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        challengeManager?.loadChallenges(completion: {
-            self.challengesTableView.reloadData()
-        })
-        
         challengesTableView.tableFooterView = UIView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        challengesTableView.reloadData()
+        self.challengeManager?.refreshChallenges {
+            self.challengesTableView.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,6 +49,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.numberOfItemsLabel?.text = String(format: "%ld desafios - %@", (challenge!.items.count), (challenge?.creatorName)!)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let challenge = challengeManager?.challenges[indexPath.row]
+            challengeManager?.deleteChallenge(challenge: challenge!, completion: {
+                self.challengesTableView.reloadData()
+            })
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

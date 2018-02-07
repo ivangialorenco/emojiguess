@@ -12,7 +12,7 @@ import FirebaseDatabase
 struct Challenge {
     
     let key: String
-    let title: String
+    var title: String
     var items:[ChallengeItem] = []
     var creatorName:String
     let ref:DatabaseReference?

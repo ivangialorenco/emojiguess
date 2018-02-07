@@ -12,19 +12,19 @@ class NewChallengeViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var challengeTitleTextField: UITextField!
     @IBOutlet weak var addEmojiTapped: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var emojisTableView: UITableView!
     
     var emojisRegistered:[ChallengeItem] = []
+    var editedChallenge:Challenge?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        if (self.editedChallenge != nil) {
+            self.emojisRegistered = (self.editedChallenge?.items)!
+            self.challengeTitleTextField.text = self.editedChallenge?.title
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -40,11 +40,49 @@ class NewChallengeViewController: UIViewController, UITableViewDataSource, UITab
         return cell
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let challengeItem = (emojisRegistered[indexPath.row] as ChallengeItem)
+            if (challengeItem.ref != nil) {
+                challengeItem.ref?.removeValue()
+            } else {
+                self.emojisRegistered.remove(at: indexPath.row)
+            }
+            
+            self.emojisTableView.reloadData()
+        }
+        
+        if editingStyle == .insert {
+            self.emojisTableView.reloadData()
+        }
+    }
+    
     @IBAction func submitButtonTapped(_ sender: Any) {
         let challengeManager = ChallengeManager()
-        challengeManager.createChallenge(challenge: Challenge(title: challengeTitleTextField.text!, creatorName: (UserManager.sharedInstance.user?.fullName)!, items: emojisRegistered, key: "")) {
+        
+        var challenge:Challenge!
+        
+        if (self.editedChallenge == nil) {
+            challenge = Challenge(title: challengeTitleTextField.text!, creatorName: (UserManager.sharedInstance.user?.fullName)!, items: emojisRegistered, key: "")
+        } else {
+            self.editedChallenge?.items = self.emojisRegistered
+            self.editedChallenge?.title = self.challengeTitleTextField.text!
+            challenge = self.editedChallenge
+        }
+        
+        challengeManager.createChallenge(challenge: challenge) {
             self.navigationController?.popViewController(animated: true)
         }
+    }
+    
+    @IBAction func deleteButtonTapped(_ sender: Any) {
+        self.editedChallenge?.ref?.removeValue()
+        
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

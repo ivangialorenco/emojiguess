@@ -192,7 +192,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0L-3w-fnY">
-                                <rect key="frame" x="162.5" y="514" width="49" height="30"/>
+                                <rect key="frame" x="316" y="514" width="49" height="30"/>
                                 <state key="normal" title="Submit"/>
                                 <connections>
                                     <action selector="submitButtonTapped:" destination="87o-cV-xn8" eventType="touchUpInside" id="0Iu-u0-oro"/>
@@ -240,6 +240,13 @@
                                     <segue destination="GzA-ub-7sK" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="joj-Zr-UtB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeM-uK-nUK">
+                                <rect key="frame" x="10" y="514" width="45" height="30"/>
+                                <state key="normal" title="Delete"/>
+                                <connections>
+                                    <action selector="deleteButtonTapped:" destination="87o-cV-xn8" eventType="touchUpInside" id="20J-5u-JXf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -249,12 +256,14 @@
                             <constraint firstItem="A0L-3w-fnY" firstAttribute="top" secondItem="iAD-Za-G8t" secondAttribute="bottom" constant="10" id="AX9-SM-uGk"/>
                             <constraint firstItem="iAD-Za-G8t" firstAttribute="top" secondItem="VpJ-a9-ca7" secondAttribute="bottom" constant="10" id="Epv-n7-Bqz"/>
                             <constraint firstItem="iAD-Za-G8t" firstAttribute="leading" secondItem="rFc-dW-9aN" secondAttribute="leading" id="GWv-kU-Wes"/>
-                            <constraint firstItem="A0L-3w-fnY" firstAttribute="centerX" secondItem="rFc-dW-9aN" secondAttribute="centerX" id="LIp-DR-5hh"/>
                             <constraint firstItem="pWb-xo-i8x" firstAttribute="centerY" secondItem="Aod-5X-YeC" secondAttribute="centerY" id="M3Z-9j-D9P"/>
                             <constraint firstItem="VpJ-a9-ca7" firstAttribute="top" secondItem="pWb-xo-i8x" secondAttribute="bottom" constant="10" id="O5f-Of-unR"/>
                             <constraint firstItem="FI9-ia-MS5" firstAttribute="top" secondItem="A0L-3w-fnY" secondAttribute="bottom" constant="10" id="ZU4-fc-1o2"/>
+                            <constraint firstItem="yeM-uK-nUK" firstAttribute="leading" secondItem="rFc-dW-9aN" secondAttribute="leading" constant="10" id="ZqY-J0-jXZ"/>
+                            <constraint firstAttribute="trailing" secondItem="A0L-3w-fnY" secondAttribute="trailing" constant="10" id="a6n-ek-edk"/>
                             <constraint firstItem="Aod-5X-YeC" firstAttribute="top" secondItem="EEn-so-A07" secondAttribute="bottom" constant="20" id="eLZ-el-BfD"/>
                             <constraint firstItem="Aod-5X-YeC" firstAttribute="leading" secondItem="rFc-dW-9aN" secondAttribute="leading" constant="10" id="iuq-Dy-EOs"/>
+                            <constraint firstItem="yeM-uK-nUK" firstAttribute="centerY" secondItem="A0L-3w-fnY" secondAttribute="centerY" id="uvn-Y8-cSn"/>
                             <constraint firstAttribute="trailing" secondItem="iAD-Za-G8t" secondAttribute="trailing" id="vOZ-nr-tWb"/>
                             <constraint firstItem="pWb-xo-i8x" firstAttribute="leading" secondItem="Aod-5X-YeC" secondAttribute="trailing" constant="10" id="ymD-xc-A6a"/>
                         </constraints>
@@ -262,6 +271,7 @@
                     <connections>
                         <outlet property="addEmojiTapped" destination="VpJ-a9-ca7" id="mTQ-zm-c59"/>
                         <outlet property="challengeTitleTextField" destination="pWb-xo-i8x" id="rdi-zf-FWi"/>
+                        <outlet property="deleteButton" destination="yeM-uK-nUK" id="IZ0-uN-x6P"/>
                         <outlet property="emojisTableView" destination="iAD-Za-G8t" id="kWk-0c-qBR"/>
                     </connections>
                 </viewController>
@@ -269,7 +279,7 @@
             </objects>
             <point key="canvasLocation" x="-274" y="732"/>
         </scene>
-        <!--Challenge View Controller-->
+        <!--Title-->
         <scene sceneID="qA6-sf-nOf">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="ZFw-OA-F4G" customClass="ChallengeViewController" customModule="emojiguess" customModuleProvider="target" sceneMemberID="viewController">
@@ -348,8 +358,16 @@
                             <constraint firstItem="AV6-fY-qMF" firstAttribute="top" secondItem="jU6-ol-sJp" secondAttribute="bottom" id="faC-Bi-ns2"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="ca8-IU-Ni7">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="bx5-ro-KgZ">
+                            <connections>
+                                <segue destination="87o-cV-xn8" kind="show" identifier="editChallengeSegue" id="EnE-Sc-vTp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="challengeTableView" destination="AV6-fY-qMF" id="9Ya-sq-8YM"/>
+                        <outlet property="editButton" destination="bx5-ro-KgZ" id="rMa-EA-Rig"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yhb-mR-TSl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -594,4 +612,7 @@
     <resources>
         <image name="checkmark" width="366" height="360"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="EnE-Sc-vTp"/>
+    </inferredMetricsTieBreakers>
 </document>

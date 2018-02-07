@@ -14,6 +14,8 @@ class ChallengeViewController: UIViewController {
     var challengeManager: ChallengeManager?
     var keyboardSize: CGRect = CGRect()
     
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    
     @IBOutlet weak var challengeTableView: UITableView!
     
     override func viewDidLoad() {
@@ -29,6 +31,20 @@ class ChallengeViewController: UIViewController {
         })
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        if let user = UserManager.sharedInstance.user {
+            if (!user.isMyChallenge(challenge: challenge!)) {
+                self.editButton.isEnabled = false
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "editChallengeSegue") {
+            if let destination = segue.destination as? NewChallengeViewController {
+                destination.editedChallenge = self.challenge
+            }
+        }
     }
 }
 

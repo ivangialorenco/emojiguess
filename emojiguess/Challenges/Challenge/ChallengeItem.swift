@@ -15,12 +15,14 @@ class ChallengeItem: NSObject {
     var emojis: String
     var answer: String
     var correctAnswers: [String] = []
+    let ref:DatabaseReference?
     
     init(emojis: String, answer: String = "", correctAnswers: [String], key: String = "") {
         self.emojis = emojis
         self.answer = answer
         self.correctAnswers = correctAnswers
         self.key = key
+        self.ref = nil
     }
     
     init(snapshot: DataSnapshot) {
@@ -29,6 +31,7 @@ class ChallengeItem: NSObject {
         emojis = snapshotValue["emojis"] as! String
         correctAnswers = snapshotValue["correctAnswers"] as! [String]
         answer = ""
+        ref = snapshot.ref
     }
     
     func isCorrectedAnswered(currentAnswer: String) -> Bool {
