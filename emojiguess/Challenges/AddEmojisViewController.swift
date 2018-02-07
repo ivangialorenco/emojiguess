@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AddEmojisDelegate {
-    func didAddEmojis(emojis: String, answers: Array<String>)
+    func didAddEmojis(key: String, emojis: String, answers: Array<String>)
 }
 
 class AddEmojisViewController: UIViewController, UITextFieldDelegate {
@@ -20,23 +20,31 @@ class AddEmojisViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var answer2: UITextField!
     @IBOutlet weak var answer3: UITextField!
     
+    @IBOutlet weak var submitButton: UIButton!
+    
+    var key:String = ""
+    var emojiLoaded:ChallengeItem?
     var delegate: AddEmojisDelegate?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewDidLoad() {
+        populateEmojis()
     }
     
+    func populateEmojis() {
+        if let emoji = emojiLoaded {
+            self.key = emoji.key
+            self.emojisField.text = emoji.emojis
+            self.answer1.text = emoji.correctAnswers[0]
+            self.answer2.text = emoji.correctAnswers[1]
+            self.answer3.text = emoji.correctAnswers[2]
+            
+            self.submitButton.setTitle(NSLocalizedString("Update", comment: ""), for: UIControlState.normal)
+        }
+    }
     
     @IBAction func addButtonTapped(_ sender: Any) {
         if (isValid()) {
-            delegate?.didAddEmojis(emojis: emojisField.text!, answers: [answer1.text!, answer2.text!, answer3.text!])
+            delegate?.didAddEmojis(key:self.key, emojis: emojisField.text!, answers: [answer1.text!, answer2.text!, answer3.text!])
             self.dismiss(animated: true, completion: nil)
         }
     }

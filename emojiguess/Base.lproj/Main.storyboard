@@ -237,7 +237,7 @@
                                 <rect key="frame" x="10" y="55" width="355" height="30"/>
                                 <state key="normal" title="Add Emoji"/>
                                 <connections>
-                                    <segue destination="GzA-ub-7sK" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="joj-Zr-UtB"/>
+                                    <segue destination="GzA-ub-7sK" kind="presentation" identifier="addEmojiSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="joj-Zr-UtB"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeM-uK-nUK">
@@ -485,7 +485,7 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="😎😎👽" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5dz-ui-ROi">
+                                    <textField opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Fill with Emojis only!" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5dz-ui-ROi">
                                         <rect key="frame" x="20" y="56" width="260" height="30"/>
                                         <accessibility key="accessibilityConfiguration" identifier="emojis"/>
                                         <nil key="textColor"/>
@@ -495,7 +495,7 @@
                                             <outlet property="delegate" destination="GzA-ub-7sK" id="fc7-R8-1g2"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="MIB" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="idR-JU-POw">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Most common answer" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="idR-JU-POw">
                                         <rect key="frame" x="20" y="142" width="260" height="30"/>
                                         <accessibility key="accessibilityConfiguration" identifier="firstAnswer"/>
                                         <nil key="textColor"/>
@@ -505,7 +505,7 @@
                                             <outlet property="delegate" destination="GzA-ub-7sK" id="gdv-fK-X0U"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Men In Black" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="9ka-bM-SaE">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Alternate answer" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="9ka-bM-SaE">
                                         <rect key="frame" x="20" y="187" width="260" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -520,7 +520,7 @@
                                         <color key="textColor" red="0.70196078429999997" green="0.70196078429999997" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="MIB: Men In Black" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="o8T-Jo-6L7">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Another answer" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="o8T-Jo-6L7">
                                         <rect key="frame" x="20" y="234" width="260" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -602,6 +602,7 @@
                         <outlet property="answer2" destination="9ka-bM-SaE" id="HIz-Ox-416"/>
                         <outlet property="answer3" destination="o8T-Jo-6L7" id="2U9-Ed-YMo"/>
                         <outlet property="emojisField" destination="5dz-ui-ROi" id="OcQ-kg-JBR"/>
+                        <outlet property="submitButton" destination="2Ro-VV-EpY" id="sMQ-Bp-78f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WfC-1g-71h" userLabel="First Responder" sceneMemberID="firstResponder"/>

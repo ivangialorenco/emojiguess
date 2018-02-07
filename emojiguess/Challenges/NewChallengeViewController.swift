@@ -17,6 +17,7 @@ class NewChallengeViewController: UIViewController, UITableViewDataSource, UITab
     
     var emojisRegistered:[ChallengeItem] = []
     var editedChallenge:Challenge?
+    var emojiSelected:ChallengeItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,11 +34,16 @@ class NewChallengeViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"emojiCell", for: indexPath)
-        let challengeItem = (emojisRegistered[indexPath.row] as ChallengeItem)
+        let challengeItem = emojisRegistered[indexPath.row]
         cell.textLabel?.text = challengeItem.emojis
         cell.detailTextLabel?.text = challengeItem.answersToString()
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.emojiSelected = emojisRegistered[indexPath.row]
+        self.performSegue(withIdentifier: "addEmojiSegue", sender: nil)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -89,13 +95,22 @@ class NewChallengeViewController: UIViewController, UITableViewDataSource, UITab
         challengeTitleTextField.resignFirstResponder()
         
         let addEmojiVC: AddEmojisViewController = segue.destination as! AddEmojisViewController
+        if let emojiSelected = self.emojiSelected {
+            addEmojiVC.emojiLoaded = emojiSelected
+        }
         addEmojiVC.delegate = self
     }
     
-    func didAddEmojis(emojis: String, answers: Array<String>) {
-        emojisRegistered.append(ChallengeItem(emojis: emojis, correctAnswers: answers))
+    func didAddEmojis(key: String, emojis: String, answers: Array<String>) {
+        if (key == "") {
+            emojisRegistered.append(ChallengeItem(emojis: emojis, correctAnswers: answers, key: key))
+        } else {
+            emojisRegistered.remove(at: Int(key)!)
+            emojisRegistered.insert(ChallengeItem(emojis: emojis, correctAnswers: answers, key: key), at: Int(key)!)
+        }
         
         emojisTableView.reloadData()
+        self.emojiSelected = nil
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
