@@ -14,6 +14,7 @@
 		822720A61EE9EE410047B251 /* ChallengeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822720A51EE9EE410047B251 /* ChallengeListTableViewCell.swift */; };
 		8229521A1EE781CC0047C24B /* ChallengeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822952191EE781CC0047C24B /* ChallengeManager.swift */; };
 		8229521C1EE781E70047C24B /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8229521B1EE781E70047C24B /* Challenge.swift */; };
+		823B7D4220AF986000614D82 /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823B7D4120AF986000614D82 /* UIColor+Custom.swift */; };
 		8262F17F1F2C30DC009B88C1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8262F17E1F2C30DC009B88C1 /* ProfileViewController.swift */; };
 		827343621F05B742003AFE25 /* NewChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827343611F05B742003AFE25 /* NewChallengeViewController.swift */; };
 		827511C81EE602800047C92D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827511C71EE602800047C92D /* AppDelegate.swift */; };
@@ -41,6 +42,7 @@
 		822720A51EE9EE410047B251 /* ChallengeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeListTableViewCell.swift; sourceTree = "<group>"; };
 		822952191EE781CC0047C24B /* ChallengeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeManager.swift; sourceTree = "<group>"; };
 		8229521B1EE781E70047C24B /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
+		823B7D4120AF986000614D82 /* UIColor+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Custom.swift"; sourceTree = "<group>"; };
 		8262F17E1F2C30DC009B88C1 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		827343611F05B742003AFE25 /* NewChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChallengeViewController.swift; sourceTree = "<group>"; };
 		827511C41EE602800047C92D /* emojiguess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = emojiguess.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +154,7 @@
 				822952181EE781AD0047C24B /* Challenges */,
 				821974401EE74D7C008F8F34 /* TabBar */,
 				827511C71EE602800047C92D /* AppDelegate.swift */,
+				823B7D4120AF986000614D82 /* UIColor+Custom.swift */,
 				827511CB1EE602800047C92D /* Main.storyboard */,
 				827511CE1EE602800047C92D /* Assets.xcassets */,
 				827511D01EE602800047C92D /* LaunchScreen.storyboard */,
@@ -297,6 +300,7 @@
 				"${BUILT_PRODUCTS_DIR}/FontAwesomeKit/FontAwesomeKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -309,6 +313,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontAwesomeKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -358,6 +363,7 @@
 			files = (
 				820A82671EEA0E6C0030A41E /* ChallengeViewController.swift in Sources */,
 				827511C81EE602800047C92D /* AppDelegate.swift in Sources */,
+				823B7D4220AF986000614D82 /* UIColor+Custom.swift in Sources */,
 				82F517A61F5A7EBC00F9D7BD /* UserManager.swift in Sources */,
 				828F720C1F046FF600EC291E /* DatabaseManager.swift in Sources */,
 				822720A41EE9ECEB0047B251 /* HomeViewController.swift in Sources */,
@@ -508,7 +514,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3TAR5FCJE4;
 				INFOPLIST_FILE = emojiguess/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -528,7 +534,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3TAR5FCJE4;
 				INFOPLIST_FILE = emojiguess/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

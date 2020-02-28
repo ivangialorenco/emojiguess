@@ -9,6 +9,7 @@ target 'emojiguess' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
+  pod 'Firebase/Messaging'
   
   pod 'FirebaseUI/Auth', '~> 4.0'
   pod 'FirebaseUI/Facebook', '~> 4.0'

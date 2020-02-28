@@ -66,11 +66,14 @@ class ChallengeTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     func enterAnswerMode() {
         answerField.becomeFirstResponder()
+        self.backgroundColor = UIColor.emojiYellow
+        
         answerMode()
     }
     
     func exitAnswerMode() {
         answerField.resignFirstResponder()
+        self.backgroundColor = UIColor.white
         
         defaultMode()
     }
@@ -92,6 +95,7 @@ class ChallengeTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     func correctlyAnsweredMode () {
         answerMode ()
+        self.backgroundColor = UIColor.emojiYellow
         
         isUserInteractionEnabled = false
         checkmark.isHidden = false
